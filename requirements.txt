@@ -8,3 +8,4 @@ mammoth>=1.6.0
 numpy>=1.26.0
 werkzeug>=3.0.0
 gunicorn
+groq
