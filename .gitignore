@@ -1,0 +1,9 @@
+.env
+__pycache__/
+*.pyc
+uploads/
+resumeai.db
+venv/
+.venv/
+*.egg-info/
+dist/
