@@ -668,7 +668,7 @@ let chatHistory     = [];
 // ══════════════════════════════════════════════════
 async function checkBackend() {
   try {
-    const r = await fetch(`${API_BASE}/health`, { signal: AbortSignal.timeout(4000) });
+    const r = await fetch(`${API_BASE}/api/health`, { signal: AbortSignal.timeout(4000) });
     const d = await r.json();
     if (d.status === 'ok') {
       document.getElementById('statusDot').className  = 'status-dot online';
@@ -723,7 +723,7 @@ async function handleFileUpload(input) {
   formData.append('resume', file);
 
   try {
-    const res  = await fetch(`${API_BASE}/upload`, { method: 'POST', body: formData });
+    const res  = await fetch(`${API_BASE}/api/upload`, { method: 'POST', body: formData });
     const data = await res.json();
 
     if (!res.ok) throw new Error(data.error || 'Upload failed');
@@ -772,7 +772,7 @@ async function analyzeResume() {
   document.getElementById('analysisResults').style.display = 'none';
 
   try {
-    const res  = await fetch(`${API_BASE}/analyze`, {
+    const res  = await fetch(`${API_BASE}/api/analyze`, {
       method : 'POST',
       headers: { 'Content-Type': 'application/json' },
       body   : JSON.stringify({ resumeText: text, targetRole: role })
@@ -892,7 +892,7 @@ async function sendChat() {
       resumeText : analysisData ? `Score:${analysisData.score} Level:${analysisData.careerLevel} Skills:${(analysisData.topSkills||[]).join(',')}` : ''
     };
 
-    const res  = await fetch(`${API_BASE}/chat`, {
+    const res  = await fetch(`${API_BASE}/api/chat`, {
       method : 'POST',
       headers: { 'Content-Type': 'application/json' },
       body   : JSON.stringify(body)
@@ -950,7 +950,7 @@ async function generateInterviewQuestions() {
 
   try {
     const resumeText = document.getElementById('resumeText').value.trim();
-    const res  = await fetch(`${API_BASE}/interview-prep`, {
+    const res  = await fetch(`${API_BASE}/api/interview-prep`, {
       method : 'POST',
       headers: { 'Content-Type': 'application/json' },
       body   : JSON.stringify({ jobTitle: role, questionType: type, resumeText: resumeText.slice(0, 1000) })
@@ -990,7 +990,7 @@ async function analyzeSkillsGap() {
   document.getElementById('gapResults').style.display = 'none';
 
   try {
-    const res  = await fetch(`${API_BASE}/skills-gap`, {
+    const res  = await fetch(`${API_BASE}/api/skills-gap`, {
       method : 'POST',
       headers: { 'Content-Type': 'application/json' },
       body   : JSON.stringify({ currentSkills: skills, targetRole: role })
@@ -1065,7 +1065,7 @@ async function generateCoverLetter() {
   setLoading('clBtn', true, '📝 Generate Cover Letter');
 
   try {
-    const res  = await fetch(`${API_BASE}/cover-letter`, {
+    const res  = await fetch(`${API_BASE}/api/cover-letter`, {
       method : 'POST',
       headers: { 'Content-Type': 'application/json' },
       body   : JSON.stringify({ resumeText, jobTitle, companyName, tone })
@@ -1097,7 +1097,7 @@ async function buildResume() {
   setLoading('buildBtn', true, '✨ Generate AI Resume');
 
   try {
-    const res  = await fetch(`${API_BASE}/build-resume`, {
+    const res  = await fetch(`${API_BASE}/api/build-resume`, {
       method : 'POST',
       headers: { 'Content-Type': 'application/json' },
       body   : JSON.stringify({
