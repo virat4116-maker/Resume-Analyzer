@@ -772,7 +772,7 @@ async function analyzeResume() {
   document.getElementById('analysisResults').style.display = 'none';
 
   try {
-    const res  = await fetch(`${API_BASE}/analyze`, {
+    const res  = await fetch(`${API_BASE}/api/analyze`, {
       method : 'POST',
       headers: { 'Content-Type': 'application/json' },
       body   : JSON.stringify({ resumeText: text, targetRole: role })
