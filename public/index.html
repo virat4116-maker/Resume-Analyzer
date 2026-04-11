@@ -654,7 +654,7 @@
 // ══════════════════════════════════════════════════
 //  CONFIG — change this if backend runs on different port
 // ══════════════════════════════════════════════════
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'https://resume-analyzer-z191.onrender.com';
 
 // ══════════════════════════════════════════════════
 //  STATE
@@ -772,7 +772,7 @@ async function analyzeResume() {
   document.getElementById('analysisResults').style.display = 'none';
 
   try {
-    const res  = await fetch(`${API_BASE}/api/analyze`, {
+    const res  = await fetch(`${API_BASE}/analyze`, {
       method : 'POST',
       headers: { 'Content-Type': 'application/json' },
       body   : JSON.stringify({ resumeText: text, targetRole: role })
